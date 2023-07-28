@@ -19,7 +19,7 @@ export class AppComponent {
     private router: Router,
   ) {}
 
-  currentHour: Observable<number> | null = null;
+  currentHour!: Observable<number>;
 
   ngOnInit() {
     this.timeService.weeklyHour$ = timer(0, 1000).pipe(

@@ -8,9 +8,12 @@ import { map } from 'rxjs/operators';
 export class TimeService {
   weeklyHour$!: Observable<string>;
 
-  lastSecond!: number;
+  lastHour = new Date().getHours();
+
+  // Set the URL of your audio file here
+  private audio = new Audio('assets/bop.mp3');
+
   ngOnInit() {
-    this.lastSecond = new Date().getSeconds();
     this.weeklyHour$ = interval(1000).pipe(
       // every 1000ms (1 second)
 
@@ -28,9 +31,10 @@ export class TimeService {
     // Convert day of week to start from Monday (1) to Sunday (7)
     const adjustedDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
 
-    if (this.lastSecond !== secondOfMinute) {
-      this.lastSecond = secondOfMinute;
+    if (this.lastHour !== hourOfDay) {
+      this.lastHour = hourOfDay;
       console.log('update');
+      this.audio.play(); // Play the sound
     }
 
     const weeklyHour =

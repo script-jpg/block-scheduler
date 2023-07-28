@@ -7,5 +7,5 @@ import { Observable } from 'rxjs';
   styleUrls: ['./watch.component.scss'],
 })
 export class WatchComponent {
-  @Input() time!: Observable<string>;
+  @Input() time!: Observable<number>;
 }
