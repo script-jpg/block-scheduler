@@ -3,6 +3,7 @@ import { TimeService } from './services/time.service';
 import { timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,10 @@ export class AppComponent {
   numBlocks: number = 168;
   blocks: string[] = Array(this.numBlocks).fill('');
 
-  constructor(public timeService: TimeService) {}
+  constructor(
+    public timeService: TimeService,
+    private router: Router,
+  ) {}
 
   currentHour: Observable<number> | null = null;
 
@@ -25,5 +29,10 @@ export class AppComponent {
     this.currentHour = this.timeService.weeklyHour$.pipe(
       map((timeString) => parseInt(timeString.split(':')[0], 10)),
     );
+  }
+
+  f() {
+    localStorage.clear();
+    location.reload();
   }
 }
