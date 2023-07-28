@@ -1,28 +1,39 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BlockService } from 'src/app/services/block.service';
 
 @Component({
   selector: 'app-block',
   template: `
-    <div [style.background]="color" class="holder">
+    <div
+      [style.background-color]="
+        highlight
+          ? '#ACFADF'
+          : 'rgba(232, 255, 206, 0.2)
+      '
+      "
+      class="holder"
+    >
       <textarea
-        (click)="f()"
+        (blur)="saveContent()"
         [(ngModel)]="content"
-        style="width:60px;height:60px;"
+        style="width:75px;height:75px;"
       ></textarea>
     </div>
   `,
   styleUrls: ['./block.component.scss'],
 })
 export class BlockComponent implements OnInit {
-  @Input() content: string = '';
-  @Input() color: string = '';
   @Input() hour: number = 0;
+  @Input() highlight: boolean = false;
+  content: string = '';
 
-  constructor() {}
+  constructor(private blockService: BlockService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.content = this.blockService.getBlock(this.hour);
+  }
 
-  f() {
-    alert(this.hour);
+  saveContent(): void {
+    this.blockService.setBlock(this.hour, this.content);
   }
 }

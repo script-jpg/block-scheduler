@@ -1,7 +1,8 @@
-<app-watch></app-watch>
+<app-watch [time]="timeService.weeklyHour$"></app-watch>
+
 <app-block
   *ngFor="let block of blocks; let i = index"
   content=""
-  color="whitesmoke"
   [hour]="i + 1"
+  [highlight]="(currentHour | async) === i + 1"
 ></app-block>
