@@ -35,4 +35,8 @@ export class AppComponent {
     localStorage.clear();
     location.reload();
   }
+
+  g() {
+    alert('Minute: ' + this.timeService.getCurrentWeeklyHour().split(':')[1]);
+  }
 }
